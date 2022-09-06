@@ -36,6 +36,7 @@ const Avatar: FC<AvatarProps> = ({
           className="absolute inset-0 w-full h-full object-cover"
           src={url}
           alt={name}
+          crossOrigin="anonymous"
         />
       )}
       <span className="wil-avatar__name">{name[0]}</span>

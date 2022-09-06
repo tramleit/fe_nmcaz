@@ -1,5 +1,6 @@
 import { CustomLink } from "data/types";
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import twFocusClass from "utils/twFocusClass";
 
@@ -24,9 +25,23 @@ const DEMO_PAGINATION: CustomLink[] = [
 
 export interface PaginationProps {
   className?: string;
+  count?: number
+
 }
 
-const Pagination: FC<PaginationProps> = ({ className = "" }) => {
+const Pagination: FC<PaginationProps> = ({ className = "", count = 0 }) => {
+  const [pagination, setPagination] = useState<CustomLink[]>([{ label: "1", href: "#" }]);
+
+  useEffect(() => {
+    if (count >= 25) {
+      let currentPage = 1;
+      for (let i = 0; i < count; i++) {
+        if (count % 25 == 0) {
+          // pagination.push({})
+        }
+      }
+    }
+  }, [count])
   const renderItem = (pag: CustomLink, index: number) => {
     if (index === 0) {
       // RETURN ACTIVE PAGINATION

@@ -11,7 +11,7 @@ export interface LocationStates {
   "/home-header-style2"?: {};
   "/home-header-style2-logedin"?: {};
   //
-  "/author/:slug"?: {};
+  "/models/:slug"?: {};
   "/author-v2/:slug"?: {};
   //
   "/single/:slug"?: {};
@@ -23,10 +23,11 @@ export interface LocationStates {
   "/single-4-sidebar/:slug"?: {};
   "/single-gallery/:slug"?: {};
   "/single-audio/:slug"?: {};
-  "/single-video/:slug"?: {};
+  "/single-video/:slug/:slug"?: {};
   //
   "/search"?: {};
   "/search-v2"?: {};
+  "/videos"?: {};
   "/about"?: {};
   "/contact"?: {};
   "/login"?: {};
@@ -41,6 +42,7 @@ export interface LocationStates {
   "/theme-blue-blueGrey"?: {};
   "/theme-purple-blueGrey"?: {};
   "/theme-teal-blueGrey"?: {};
+  "/models"?: {};
   "/theme-blueGrey-blueGrey"?: {};
   "/theme-red-warmGrey"?: {};
   "/theme-cyan-warmGrey"?: {};

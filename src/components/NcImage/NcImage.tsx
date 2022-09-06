@@ -86,8 +86,8 @@ const NcImage: FC<NcImageProps> = ({
       data-nc-id="NcImage"
       ref={_containerRef}
     >
-      {__src && imageLoaded ? (
-        <img src={__src} className={className} alt={alt} {...args} />
+      {__src ? (
+        <img src={__src} className={className} alt={alt} {...args} crossOrigin="anonymous" />
       ) : (
         renderLoadingPlaceholder()
       )}

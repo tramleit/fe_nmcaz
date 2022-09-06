@@ -6,7 +6,7 @@ export const LoginSuccess = () => {
     useEffect(() => {
         setTimeout(() => {
             window.close();
-        }, 1000);
+        }, 2000);
     }, []);
 
 

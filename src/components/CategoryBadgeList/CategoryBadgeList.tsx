@@ -5,7 +5,7 @@ import Badge from "components/Badge/Badge";
 export interface CategoryBadgeListProps {
   className?: string;
   itemClass?: string;
-  categories: PostDataType["categories"];
+  categories: string;
 }
 
 const CategoryBadgeList: FC<CategoryBadgeListProps> = ({
@@ -18,15 +18,15 @@ const CategoryBadgeList: FC<CategoryBadgeListProps> = ({
       className={`nc-CategoryBadgeList ${className}`}
       data-nc-id="CategoryBadgeList"
     >
-      {categories.map((item, index) => (
-        <Badge
-          className={itemClass}
-          key={index}
-          name={item.name}
-          href={item.href}
-          color={item.color as any}
-        />
-      ))}
+      {/* {categories.map((item, index) => ( */}
+      <Badge
+        className={itemClass}
+        // key={index}
+        name={"Trending"}
+        href={"#"}
+        color={"blue"}
+      />
+      {/* ))} */}
     </div>
   );
 };

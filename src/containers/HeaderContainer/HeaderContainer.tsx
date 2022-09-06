@@ -75,9 +75,8 @@ const HeaderContainer: FC<HeaderContainerProps> = ({ className = "" }) => {
   }, []);
 
   useEffect(() => {
-    console.log("IsConnected", store.getState().app.isAuthenticated);
-
-    if (store.getState().app.isAuthenticated) {
+    //We check if the cookie is expired
+    if (document.cookie.split(" ").length > 1) {
       setHeaderSelected("Header 3");
     } else {
       setHeaderSelected("Header 1");

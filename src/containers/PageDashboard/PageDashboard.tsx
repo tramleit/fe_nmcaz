@@ -90,7 +90,8 @@ const PageDashboard: FC<PageDashboardProps> = ({ className = "" }) => {
 
     //If no user connected redirect to login
     let userFetched = await fetchModelProfilDashboard();
-    if (!userFetched) window.location.href = `${SITE_URL}login`;
+
+    // if (!userFetched) window.location.href = `${SITE_URL}login`;
     console.log("My user fetched", userFetched.id);
     createTab(userFetched)
     setUser(userFetched);

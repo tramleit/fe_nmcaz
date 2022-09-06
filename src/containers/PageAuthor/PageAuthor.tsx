@@ -20,11 +20,14 @@ import SectionSliderNewAuthors from "components/SectionSliderNewAthors/SectionSl
 import NcImage from "components/NcImage/NcImage";
 import { useLocation } from "react-router-dom";
 import { fetchModelProfil } from "functions/user";
+import { SITE_URL } from "constants/constants";
+import { IProfil } from "interface/interface";
 
 export interface PageAuthorProps {
   className?: string;
 }
 const posts: PostDataType[] = DEMO_POSTS.filter((_, i) => i < 12);
+// const posts: PostDataType[] = DEMO_POSTS.filter((_, i) => i < 12);
 const AUTHOR: PostAuthorType = DEMO_AUTHORS[0];
 const FILTERS = [
   { name: "Most Recent" },
@@ -33,16 +36,26 @@ const FILTERS = [
   { name: "Most Discussed" },
   { name: "Most Viewed" },
 ];
-const TABS = ["Articles", "Favorites", "Saved"];
+const TABS = ["Videos", "Favorites"];
 
 const PageAuthor: FC<PageAuthorProps> = ({ className = "" }) => {
   const [tabActive, setTabActive] = useState<string>(TABS[0]);
-  const [dataUser, setUserData] = useState<any>(null);
+  const [dataUser, setUserData] = useState<IProfil[]>();
   const location = useLocation()
 
   const fetch = async () => {
     console.log("we are fetching...");
-    setUserData(await fetchModelProfil(location.pathname.substring('/author/'.length)))
+    let profil = await fetchModelProfil(location.pathname.substring('/author/'.length));
+    console.log(profil);
+    if (profil) {
+
+
+      setUserData(await fetchModelProfil(location.pathname.substring('/author/'.length)))
+    } else {
+      //We dont have any profile we redirect
+      window.location.href = `${SITE_URL}models`
+    }
+
   }
 
 
@@ -62,7 +75,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = "" }) => {
 
   return (
     <>
-      {dataUser !== null ? (
+      {dataUser ? (
         <div className={`nc-PageAuthor  ${className}`} data-nc-id="PageAuthor">
 
           <Helmet>
@@ -72,28 +85,20 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = "" }) => {
           {/* HEADER */}
           <div className="w-screen px-2 xl:max-w-screen-2xl mx-auto">
             <div className="rounded-3xl md:rounded-[40px] relative aspect-w-16 aspect-h-12 sm:aspect-h-7 xl:sm:aspect-h-6 overflow-hidden ">
-              <NcImage
-                containerClassName="absolute inset-0"
-                src="https://images.pexels.com/photos/459225/pexels-photo-459225.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-                className="object-cover w-full h-full"
-              />
+
+              <img src={dataUser[0].thumbnail} className="absolute inset-0 object-cover w-full h-full" crossOrigin="anonymous" />
             </div>
             <div className="relative container -mt-20 lg:-mt-48">
               <div className=" bg-white dark:bg-neutral-900 dark:border dark:border-neutral-700 p-5 lg:p-16 rounded-[40px] shadow-2xl flex flex-col sm:flex-row sm:items-center">
-                <Avatar
-                  containerClassName="ring-4 ring-white dark:ring-0 shadow-2xl"
-                  imgUrl={AUTHOR.avatar}
-                  sizeClass="w-20 h-20 text-xl lg:text-2xl lg:w-36 lg:h-36"
-                  radius="rounded-full"
-                />
+                <img src={dataUser[0].picture} className="ring-4 ring-white dark:ring-0 shadow-2xl w-20 h-20 text-xl lg:text-2xl lg:w-36 lg:h-36" alt="" crossOrigin="anonymous" />
                 <div className="mt-5 sm:mt-0 sm:ml-8 space-y-4 max-w-lg">
                   <h2 className="inline-block text-2xl sm:text-3xl md:text-4xl font-semibold">
-                    {dataUser.fullName}
+                    {dataUser[0].fullName}
                   </h2>
                   <span className="block text-sm text-neutral-6000 dark:text-neutral-300 md:text-base">
-                    {dataUser.bio}
+                    {dataUser[0].bio}
                   </span>
-                  <SocialsList />
+                  <SocialsList user={dataUser[0]} />
                 </div>
               </div>
             </div>
@@ -122,20 +127,20 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = "" }) => {
 
               {/* LOOP ITEMS */}
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 mt-8 lg:mt-10">
-                {posts.map((post) => (
+                {dataUser.map((post) => (
                   <Card11 key={post.id} post={post} />
                 ))}
               </div>
 
               {/* PAGINATION */}
               <div className="flex flex-col mt-12 lg:mt-16 space-y-5 sm:space-y-0 sm:space-x-3 sm:flex-row sm:justify-between sm:items-center">
-                <Pagination />
-                <ButtonPrimary>Show me more</ButtonPrimary>
+                {/* <Pagination />
+                <ButtonPrimary>Show me more</ButtonPrimary> */}
               </div>
             </main>
 
             {/* === SECTION 5 === */}
-            <div className="relative py-16">
+            {/* <div className="relative py-16">
               <BackgroundSection />
               <SectionGridCategoryBox
                 categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}
@@ -143,18 +148,18 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = "" }) => {
               <div className="text-center mx-auto mt-10 md:mt-16">
                 <ButtonSecondary>Show me more</ButtonSecondary>
               </div>
-            </div>
+            </div> */}
 
             {/* === SECTION 5 === */}
-            <SectionSliderNewAuthors
+            {/* <SectionSliderNewAuthors
               heading="Top elite authors"
               subHeading="Discover our elite writers"
               uniqueSliderClass="PageAuthor__slider"
               authors={DEMO_AUTHORS.filter((_, i) => i < 10)}
-            />
+            /> */}
 
             {/* SUBCRIBES */}
-            <SectionSubscribe2 />
+            {/* <SectionSubscribe2 /> */}
           </div>
         </div>
       ) : "The profil is loading..."}

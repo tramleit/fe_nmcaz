@@ -43,6 +43,8 @@ import { SITE_URL } from "../constants/constants";
 import { setIsAuthenticated, setAuthUser } from "app/appSlice";
 import { fetchAuthUser } from "functions/user";
 import { useDispatch } from "react-redux";
+import PageListModels from "containers/PageAuthor/PageListModels";
+import PageListVideo from "containers/PageVideos/PageListVideo";
 
 export const pages: Page[] = [
   { path: "/", exact: true, component: PageHomeDemo2 },
@@ -56,7 +58,7 @@ export const pages: Page[] = [
   { path: "/archive-video/:slug", component: PageArchiveVideo },
   { path: "/archive-audio/:slug", component: PageArchiveAudio },
   //
-  { path: "/author/:slug", component: PageAuthor },
+  { path: "/models/:slug", component: PageAuthor },
   { path: "/author-v2/:slug", component: PageAuthorV2 },
   //
   { path: "/single/:slug", component: PageSingleTemp3Sidebar },
@@ -93,17 +95,20 @@ export const pages: Page[] = [
     component: PageSingleAudio,
   },
   {
-    path: "/single-video/:slug",
+    path: "/single-video/:slug/:slug",
     component: PageSingleVideo,
   },
 
   { path: "/search", component: PageSearch },
   { path: "/search-v2", component: PageSearchV2 },
+  { path: "/videos", component: PageListVideo },
+
   { path: "/about", component: PageAbout },
   { path: "/contact", component: PageContact },
   { path: "/page404", component: Page404 },
   { path: "/login", component: PageLogin },
   { path: "/login-success", component: LoginSuccess },
+  { path: "/models", component: PageListModels },
   { path: "/signup", component: PageSignUp },
   { path: "/forgot-pass", component: PageForgotPass },
   { path: "/dashboard", component: PageDashboard },
@@ -121,27 +126,7 @@ export const pages: Page[] = [
 
 
 const Routes = () => {
-  const dispatch = useDispatch();
-  // const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const checkIfUserConnected = async () => {
-    let user = await fetchAuthUser();
-    console.log(await fetchAuthUser());
-
-    console.log("Oh yeah we check IsConnected ", user);
-
-    if (user !== null) {
-      // sessionStorage.setItem("isAuth", "true");
-      dispatch(setIsAuthenticated(true));
-      dispatch(setAuthUser(user));
-    }
-
-    // setIsLoading(false);
-  }
-
-  window.onload = () => {
-    checkIfUserConnected();
-  }
   return (
     <BrowserRouter
       basename={
