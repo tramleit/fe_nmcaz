@@ -28,7 +28,7 @@ export const getAllVideos = async (search = "", limit: number = 25, offset: numb
 }
 
 export const getSingleVideo = async (username: string, title: string) => {
-    const response = await axios.get(`${API_URL}video/${username}?title=${title}`).catch((err: Error) => {
+    const response = await axios.get(`${API_URL}video/${username}?title=${title}`, { withCredentials: true }).catch((err: Error) => {
         console.log("Error: ", err);
     })
     if (response && response.data) return response.data[0];

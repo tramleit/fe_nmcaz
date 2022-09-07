@@ -42,4 +42,6 @@ export interface IVideoAuthor extends IVideo {
     fullName: string
     username: string
     picture: string
+    user_id: number
+    purchased: boolean
 }

@@ -19,7 +19,8 @@ import { downloadVideo, getSingleVideo } from "functions/video";
 import { IVideoAuthor } from "interface/interface";
 import Loading from "components/LoadingVideo/Loading";
 import { API_URL } from "constants/constants";
-
+import { AiFillLock } from "react-icons/ai"
+import axios from "axios";
 export interface PageSingleVideoProps {
   className?: string;
 }
@@ -35,14 +36,12 @@ const PageSingleVideo: FC<PageSingleVideoProps> = ({ className = "" }) => {
   const location = useLocation()
   const [isPlay, setIsPlay] = useState(false);
   const [videoAuthor, setIsVideoAuthor] = useState<IVideoAuthor>();
-  const [video, setVideo] = useState<any>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const fetch = async () => {
     setIsLoading(true)
     let params = location.pathname.split("/");
     let video = await getSingleVideo(params[params.length - 2], params[params.length - 1]);
-    setVideo(downloadVideo(video.id))
     setIsVideoAuthor(video);
     setIsLoading(false);
   }
@@ -56,9 +55,6 @@ const PageSingleVideo: FC<PageSingleVideoProps> = ({ className = "" }) => {
       dispatch(changeCurrentPage({ type: "/", data: {} }));
     };
   }, []);
-
-  console.log(video, "video");
-
 
   const renderMainVideo = () => {
     return (
@@ -78,17 +74,26 @@ const PageSingleVideo: FC<PageSingleVideoProps> = ({ className = "" }) => {
             </div>
           </div>
         )}
-        <ReactPlayer
-          url={`${API_URL}video/download/${videoAuthor?.id}`}
-          className="absolute inset-0"
-          playing={isSafariBrowser() ? isPlay : true}
-          width="100%"
-          height="100%"
-          controls
-          crossOrigin={"anonymous"}
-          light={isSafariBrowser() ? false : videoAuthor?.thumbnail}
-          playIcon={<NcPlayIcon />}
-        />
+        {(videoAuthor?.purchased) ? (
+          <ReactPlayer
+            url={`${API_URL}video/download/${videoAuthor?.id}?user_id=${videoAuthor?.user_id}`}
+            className="absolute inset-0"
+            playing={isSafariBrowser() ? isPlay : true}
+            width="100%"
+            height="100%"
+            controls
+            crossOrigin={"anonymous"}
+            light={isSafariBrowser() ? false : videoAuthor?.thumbnail}
+            playIcon={<NcPlayIcon />}
+          />
+
+        ) :
+          (<>
+            <div className="w-full h-full relative inset-0 cursor-pointer	">
+              <img src={videoAuthor?.thumbnail} alt="thumbnail" className="brightness-50 relative top-0 left-0" />
+              <AiFillLock size={90} className="absolute top-1/2 w-full bg-neutral-700" color={"white"} />
+            </div>
+          </>)}
       </div>
     );
   };
@@ -133,6 +138,7 @@ const PageSingleVideo: FC<PageSingleVideoProps> = ({ className = "" }) => {
             className={`nc-PageSingleVideo  ${className}`}
             data-nc-id="PageSingleVideo"
           >
+
             {/* SINGLE HEADER */}
             <header className="container relative py-14 lg:py-20 flex flex-col lg:flex-row lg:items-center">
               <div className="nc-PageSingleVideo__headerWrap absolute inset-y-0 transform translate-x-1/2 right-1/2 w-screen lg:translate-x-0 lg:w-[calc(100vw/2)] bg-neutral-900 dark:bg-black dark:bg-opacity-50 lg:rounded-r-[40px]"></div>
