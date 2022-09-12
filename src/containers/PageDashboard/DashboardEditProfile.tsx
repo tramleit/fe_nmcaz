@@ -9,21 +9,22 @@ import { update } from "lodash";
 
 const DashboardEditProfile = ({ user }: { user: IUser }) => {
 
+  const [response, setResponse] = useState<string>("");
+
   const updateProfil = async () => {
     let myForm = document.getElementById('editForm') as HTMLFormElement;
     if (myForm != null) {
       const formData: FormData = new FormData(myForm);
       const values = Object.fromEntries(formData.entries())
       const response = await updateModelProfil(values);
-      console.log(response);
-
+      (response && response.affectedRows) > 0 ? setResponse("Profil updated 😊") : setResponse("An error as occured, please try again.");
     }
 
   }
 
   return (
     <div className="rounded-xl md:border md:border-neutral-100 dark:border-neutral-800 md:p-6">
-      { }
+      {response !== "" && <h1 className={`bold text-m ${response.substring(0, 6) == "Profil" ? "text-emerald-600	" : "text-rose-600"}`}>{response}</h1>}
       <form className="grid md:grid-cols-2 gap-6" id="editForm">
         <label className="block">
           <Label>First name</Label>

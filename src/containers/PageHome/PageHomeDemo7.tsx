@@ -18,7 +18,7 @@ import {
 import { DEMO_CATEGORIES } from "data/taxonomies";
 import { DEMO_AUTHORS } from "data/authors";
 import SectionBecomeAnAuthor from "components/SectionBecomeAnAuthor/SectionBecomeAnAuthor";
-import SectionSliderNewCategories from "components/SectionSliderNewCategories/SectionSliderNewCategories";
+import SectionSliderNewCategories from "components/SliderTrending/SliderTrending";
 import SectionSliderNewAuthors from "components/SectionSliderNewAthors/SectionSliderNewAuthors";
 import SectionMagazine4 from "./SectionMagazine4";
 import SectionAds from "./SectionAds";
@@ -84,7 +84,7 @@ const PageHomeDemo7: React.FC = () => {
             <SectionSliderNewAuthors
               heading="Newest authors"
               subHeading="Say hello to future creator potentials"
-              authors={DEMO_AUTHORS.filter((_, i) => i < 10)}
+              // authors={DEMO_AUTHORS.filter((_, i) => i < 10)}
               uniqueSliderClass="PageHomeDemo7"
             />
           </div>
@@ -94,7 +94,7 @@ const PageHomeDemo7: React.FC = () => {
             className="py-16 lg:py-28"
             heading="Top trending topics"
             subHeading="Discover 233 topics"
-            categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}
+            // categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}
             categoryCardType="card4"
             uniqueSliderClass="PageHomeDemo7"
           />

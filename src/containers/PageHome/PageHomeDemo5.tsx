@@ -10,7 +10,7 @@ import { DEMO_POSTS, DEMO_POSTS_GALLERY, DEMO_POSTS_VIDEO } from "data/posts";
 import { DEMO_CATEGORIES } from "data/taxonomies";
 import { DEMO_AUTHORS } from "data/authors";
 import SectionBecomeAnAuthor from "components/SectionBecomeAnAuthor/SectionBecomeAnAuthor";
-import SectionSliderNewCategories from "components/SectionSliderNewCategories/SectionSliderNewCategories";
+import SectionSliderNewCategories from "components/SliderTrending/SliderTrending";
 import SectionMagazine4 from "./SectionMagazine4";
 import SectionAds from "./SectionAds";
 import SectionGridPosts from "./SectionGridPosts";
@@ -59,7 +59,7 @@ const PageHomeDemo5: React.FC = () => {
             <SectionSliderNewCategories
               heading="Top trending topics"
               subHeading="Discover 233 topics"
-              categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}
+              // categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}
               categoryCardType="card5"
               uniqueSliderClass="PageHomeDemo5"
             />

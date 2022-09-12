@@ -45,9 +45,10 @@ import { fetchAuthUser } from "functions/user";
 import { useDispatch } from "react-redux";
 import PageListModels from "containers/PageAuthor/PageListModels";
 import PageListVideo from "containers/PageVideos/PageListVideo";
+import Purchase from "containers/PageBuy/Purchase";
 
 export const pages: Page[] = [
-  { path: "/", exact: true, component: PageHomeDemo2 },
+  // { path: "/", exact: true, component: PageHomeDemo2 },
   { path: "/#", exact: true, component: PageHome },
   //
   { path: "/home-header-style1", exact: true, component: PageHome },
@@ -98,7 +99,10 @@ export const pages: Page[] = [
     path: "/single-video/:slug/:slug",
     component: PageSingleVideo,
   },
-
+  {
+    path: "/purchase",
+    component: Purchase,
+  },
   { path: "/search", component: PageSearch },
   { path: "/search-v2", component: PageSearchV2 },
   { path: "/videos", component: PageListVideo },
@@ -114,12 +118,12 @@ export const pages: Page[] = [
   { path: "/dashboard", component: PageDashboard },
   { path: "/subscription", component: PageSubcription },
   //
-  { path: "/home-demo-2", component: PageHomeDemo2 },
-  { path: "/home-demo-3", component: PageHomeDemo3 },
-  { path: "/home-demo-4", component: PageHomeDemo4 },
-  { path: "/home-demo-5", component: PageHomeDemo5 },
-  { path: "/home-demo-6", component: PageHomeDemo6 },
-  { path: "/home-demo-7", component: PageHomeDemo7 },
+  // { path: "/home-demo-2", component: PageHomeDemo2 },
+  // { path: "/home-demo-3", component: PageHomeDemo3 },
+  { path: "/", component: PageHomeDemo4 },
+  // { path: "/home-demo-5", component: PageHomeDemo5 },
+  // { path: "/home-demo-6", component: PageHomeDemo6 },
+  // { path: "/home-demo-7", component: PageHomeDemo7 },
   //
 ];
 

@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useState } from "react";
 import Heading from "components/Heading/Heading";
 import Glide from "@glidejs/glide";
 import { PostDataType, TaxonomyType } from "data/types";
@@ -8,13 +8,16 @@ import CardCategory1 from "components/CardCategory1/CardCategory1";
 import CardCategory2 from "components/CardCategory2/CardCategory2";
 import CardCategory5 from "components/CardCategory5/CardCategory5";
 import ncNanoId from "utils/ncNanoId";
+import { IVideoAuthor } from "interface/interface";
+import { getTrendingVideos } from "functions/video";
+import CardVideo from "components/Card11/CardVideoTrending";
 
 export interface SectionSliderNewCategoriesProps {
   className?: string;
   itemClassName?: string;
   heading: string;
   subHeading: string;
-  categories: PostDataType["categories"];
+  // categories: PostDataType["categories"];
   categoryCardType?: "card1" | "card2" | "card3" | "card4" | "card5";
   itemPerRow?: 4 | 5;
   uniqueSliderClass: string;
@@ -25,7 +28,7 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
   subHeading,
   className = "",
   itemClassName = "",
-  categories,
+  // categories,
   itemPerRow = 5,
   categoryCardType = "card3",
   uniqueSliderClass = "",
@@ -69,37 +72,39 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
   useEffect(() => {
     if (!MY_GLIDE) return;
     MY_GLIDE.mount();
+
+
+
   }, [MY_GLIDE]);
 
-  const renderCard = (item: TaxonomyType, index: number) => {
-    const topIndex = index < 3 ? `#${index + 1}` : undefined;
-    switch (categoryCardType) {
-      case "card1":
-        return <CardCategory1 taxonomy={item} />;
-      case "card2":
-        return <CardCategory2 index={topIndex} taxonomy={item} />;
-      case "card3":
-        return <CardCategory3 taxonomy={item} />;
-      case "card4":
-        return <CardCategory4 index={topIndex} taxonomy={item} />;
-      case "card5":
-        return <CardCategory5 taxonomy={item} />;
-      default:
-        return null;
-    }
-  };
+  const [videos, setVideos] = useState<IVideoAuthor[]>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const fetch = async () => {
+    setIsLoading(true);
+    let videos = await getTrendingVideos();
+    console.log(videos);
+
+    setVideos(videos);
+    setIsLoading(false);
+  }
+
+  useEffect(() => {
+    //We go fetch the most popular vidseo
+    fetch()
+  }, [])
 
   return (
     <div className={`nc-SectionSliderNewCategories ${className}`}>
       <div className={`${UNIQUE_CLASS} flow-root`}>
-        <Heading desc={subHeading} hasNextPrev>
-          {heading}
+        <Heading desc={"The most popular video at the moment"} hasNextPrev>
+          {/* {heading} */}Trending videos
         </Heading>
         <div className="glide__track" data-glide-el="track">
           <ul className="glide__slides">
-            {categories.map((item, index) => (
+            {videos && videos.map((item, index) => (
               <li key={index} className={`glide__slide ${itemClassName}`}>
-                {renderCard(item, index)}
+                <CardVideo post={item} />
               </li>
             ))}
           </ul>
@@ -110,3 +115,23 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
 };
 
 export default SectionSliderNewCategories;
+
+
+
+  // const renderCard = (item: TaxonomyType, index: number) => {
+  //   const topIndex = index < 3 ? `#${index + 1}` : undefined;
+  //   switch (categoryCardType) {
+  //     case "card1":
+  //       return <CardCategory1 taxonomy={item} />;
+  //     case "card2":
+  //       return <CardCategory2 index={topIndex} taxonomy={item} />;
+  //     case "card3":
+  //       return <CardCategory3 taxonomy={item} />;
+  //     case "card4":
+  //       return <CardCategory4 index={topIndex} taxonomy={item} />;
+  //     case "card5":
+  //       return <CardCategory5 taxonomy={item} />;
+  //     default:
+  //       return null;
+  //   }
+  // };

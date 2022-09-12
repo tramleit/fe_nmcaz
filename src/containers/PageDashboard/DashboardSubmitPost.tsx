@@ -23,8 +23,6 @@ const DashboardSubmitPost = ({ user }: { user: IUser }) => {
       }
       const response = await uploadVideo(formData);
 
-      console.log(response, response.affectedRows);
-
       //Item added
       if (response && response.affectedRows > 0) {
         setResponse("Video added 😊")
@@ -71,6 +69,16 @@ const DashboardSubmitPost = ({ user }: { user: IUser }) => {
             <Label>Tags</Label>
 
             <Input type="text" className="mt-1" name="tags" />
+          </label>
+          <label className="block">
+            <Label>Duration (HH:MM:SS)</Label>
+
+            <Input type="time" step={"1"} defaultValue={"00:05:00"} className="mt-1" name="time" />
+          </label>
+          <label className="block">
+            <Label>Price</Label>
+
+            <Input type="number" step="0.5" className="mt-1" name="price" />
           </label>
           <input type="hidden" name="user_id" value={user.id} />
           <input type="hidden" name="fullname" value={user.fullName} />

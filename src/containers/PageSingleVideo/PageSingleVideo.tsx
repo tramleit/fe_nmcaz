@@ -18,7 +18,7 @@ import { useLocation, useParams } from "react-router-dom";
 import { downloadVideo, getSingleVideo } from "functions/video";
 import { IVideoAuthor } from "interface/interface";
 import Loading from "components/LoadingVideo/Loading";
-import { API_URL } from "constants/constants";
+import { API_URL, SITE_URL } from "constants/constants";
 import { AiFillLock } from "react-icons/ai"
 import axios from "axios";
 export interface PageSingleVideoProps {
@@ -56,6 +56,17 @@ const PageSingleVideo: FC<PageSingleVideoProps> = ({ className = "" }) => {
     };
   }, []);
 
+  const handleLock = () => {
+    if (videoAuthor && videoAuthor.user_id > 0) {
+      //User is logged into his account
+      window.location.href = `${SITE_URL}purchase?title=${videoAuthor.title}&model=${videoAuthor.username}`;
+
+    } else {
+      //User not connected, we redirect
+      window.location.href = `${SITE_URL}login?message=You must be logged in first`;
+    }
+  }
+
   const renderMainVideo = () => {
     return (
 
@@ -85,11 +96,12 @@ const PageSingleVideo: FC<PageSingleVideoProps> = ({ className = "" }) => {
             crossOrigin={"anonymous"}
             light={isSafariBrowser() ? false : videoAuthor?.thumbnail}
             playIcon={<NcPlayIcon />}
+            controlsList="nodownload"
+            oncontextmenu="return false;"
           />
-
         ) :
           (<>
-            <div className="w-full h-full relative inset-0 cursor-pointer	">
+            <div className="w-full h-full relative inset-0 cursor-pointer" onClick={() => handleLock()}>
               <img src={videoAuthor?.thumbnail} alt="thumbnail" className="brightness-50 relative top-0 left-0" />
               <AiFillLock size={90} className="absolute top-1/2 w-full bg-neutral-700" color={"white"} />
             </div>
@@ -110,6 +122,9 @@ const PageSingleVideo: FC<PageSingleVideoProps> = ({ className = "" }) => {
                 mainClass="text-neutral-900 font-semibold text-3xl md:!leading-[120%] dark:text-neutral-100"
                 title={videoAuthor?.title as string}
               />
+              <h1>{videoAuthor.length} minutes </h1>
+              <h1 className="text-lg font-bold">{videoAuthor.price} $</h1>
+
 
               <div className="w-full border-b border-neutral-100 dark:border-neutral-800"></div>
               <div className="flex flex-col space-y-5">

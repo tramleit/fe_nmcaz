@@ -13,10 +13,14 @@ export const uploadVideo = async (data: unknown) => {
     });
     if (response && response.data) return response.data;
 }
+
+
 export const getVideos = async (id: number) => {
-    const response = await axios.get(`${API_URL}video/${id}`, { withCredentials: true }).catch((err: Error) => {
+    const response = await axios.get(`${API_URL}video/user/${id}`, { withCredentials: true }).catch((err: Error) => {
         console.log("Error: ", err);
     })
+    console.log(response);
+
     if (response && response.data) return response.data;
 }
 
@@ -43,4 +47,12 @@ export const downloadVideo = async (id: number) => {
     })
     console.log(response);
     if (response && response.data) return response.data[0];
+}
+
+export const getTrendingVideos = async () => {
+
+    const response = await axios.get(`${API_URL}video/trending/now`).catch((err: Error) => {
+        console.log("Error: ", err);
+    })
+    if (response && response.data) return response.data;
 }

@@ -8,7 +8,7 @@ import SectionAds from "./SectionAds";
 import SectionSubscribe2 from "components/SectionSubscribe2/SectionSubscribe2";
 import SectionSliderNewAuthors from "components/SectionSliderNewAthors/SectionSliderNewAuthors";
 import { DEMO_AUTHORS } from "data/authors";
-import SectionSliderNewCategories from "components/SectionSliderNewCategories/SectionSliderNewCategories";
+import SectionSliderNewCategories from "components/SliderTrending/SliderTrending";
 import SectionLatestPosts from "./SectionLatestPosts";
 import SectionHero3 from "./SectionHero3";
 import Card16Podcast from "components/Card16Podcast/Card16Podcast";
@@ -58,7 +58,7 @@ const PageHomeDemo2: React.FC = () => {
           categoryCardType="card5"
           itemPerRow={4}
           subHeading="Discover over 112 topics"
-          categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}
+          // categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}
           uniqueSliderClass="PageHomeDemo2"
         />
 
@@ -101,7 +101,7 @@ const PageHomeDemo2: React.FC = () => {
           <SectionSliderNewAuthors
             heading="Top authors of month"
             subHeading="Say hello to future creator potentials"
-            authors={DEMO_AUTHORS.filter((_, i) => i < 10)}
+            // authors={DEMO_AUTHORS.filter((_, i) => i < 10)}
             uniqueSliderClass="PageHomeDemo2"
           />
         </div>

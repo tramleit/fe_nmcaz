@@ -21,6 +21,9 @@ export interface IVideo {
     views: number,
     date_added: string
     categories: string
+    status: number
+    price: number
+    length: string
 }
 
 export interface IProfil {

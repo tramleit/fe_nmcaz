@@ -53,6 +53,9 @@ const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
           console.log("yay we're authtenticate");
           let user = await fetchAuthUser()
           if (user !== null) {
+            localStorage.setItem("picture", user.picture);
+            localStorage.setItem("username", user.username);
+            localStorage.setItem("fullName", user.fullName);
             history.push("/dashboard");
           }
           if (timer) clearInterval(timer);

@@ -19,17 +19,16 @@ const SectionBecomeAnAuthor: FC<SectionBecomeAnAuthorProps> = ({
     >
       <div className="flex-shrink-0 mb-14 lg:mb-0 lg:mr-10 lg:w-2/5">
         <span className="text-xs uppercase tracking-wider font-medium text-neutral-400">
-          supper change your planning powers
+          🚀 Make money, fast !
         </span>
         <h2 className="font-semibold text-3xl sm:text-4xl mt-3">
-          Become an author and share your great stories
+          Become a model and share your contents
         </h2>
         <span className="block mt-8 text-neutral-500 dark:text-neutral-400">
-          Become an author you can earn extra income by writing articles. Read
-          and share new perspectives on just about any topic. Everyone’s
+          Become a model you can earn extra income by selling videos. Everyone’s
           welcome.
         </span>
-        <ButtonPrimary className="mt-8">Become an author</ButtonPrimary>
+        <ButtonPrimary className="mt-8">Become an model</ButtonPrimary>
       </div>
       <div className="flex-grow">
         <NcImage src={rightImg} />

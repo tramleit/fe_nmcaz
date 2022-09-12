@@ -11,7 +11,7 @@ import SectionAds from "./SectionAds";
 import SectionSliderNewAuthors from "components/SectionSliderNewAthors/SectionSliderNewAuthors";
 import SectionBecomeAnAuthor from "components/SectionBecomeAnAuthor/SectionBecomeAnAuthor";
 import { TaxonomyType } from "data/types";
-import SectionSliderNewCategories from "components/SectionSliderNewCategories/SectionSliderNewCategories";
+import SliderTrending from "components/SliderTrending/SliderTrending";
 import SectionGridPosts from "./SectionGridPosts";
 import BgGlassmorphism from "components/BgGlassmorphism/BgGlassmorphism";
 import SectionTrending from "./SectionTrending";
@@ -109,7 +109,7 @@ const PageHomeDemo4: React.FC = () => {
           href="/single-template-3/this-is-single-slug"
           youtubeID="qTsXfGVjm1w"
           rightImg="https://images.pexels.com/photos/4666750/pexels-photo-4666750.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-          heading="The hidden world of whale culture"
+          heading="Nmcaz Videos"
           subHeading="From singing competitions to food preferences, scientists are
           learning whales have cultural differences once thought to be unique
           to humans."
@@ -129,20 +129,21 @@ const PageHomeDemo4: React.FC = () => {
             {/* SECTION 1 */}
             <div className="relative py-16">
               <BackgroundSection />
-              <SectionSliderNewCategories
-                heading="Subtopics of Travel"
+              <SliderTrending
+                heading="Trending videos"
                 subHeading="Discover 286,833 beautiful places to go"
-                categories={TRAVEL_SUBCATS}
+                // categories={TRAVEL_SUBCATS}
                 uniqueSliderClass="PageHomeDemo4"
               />
             </div>
 
-            <SectionMagazine6
+            {/* <SectionMagazine6
               className="py-16 lg:py-28"
               heading="🧩 Editor Picks"
               posts={MAGAZINE1_POSTS}
               tabs={MAGAZINE1_TABS}
-            />
+            /> */}
+            <SectionAds className="py-16 lg:py-28" />
 
             {/* SECTION 3 */}
             <div className="relative py-16">
@@ -150,22 +151,22 @@ const PageHomeDemo4: React.FC = () => {
               <SectionSliderNewAuthors
                 heading="Newest authors"
                 subHeading="Say hello to future creator potentials"
-                authors={DEMO_AUTHORS.filter((_, i) => i < 10)}
+                // authors={DEMO_AUTHORS.filter((_, i) => i < 10)}
                 uniqueSliderClass="PageHomeDemo4"
               />
             </div>
 
             {/* SECTION 3 */}
-            <SectionSubscribe2 className="py-16 lg:py-28" />
+            {/* <SectionSubscribe2 className="py-16 lg:py-28" /> */}
 
             {/* === SECTION 6 === */}
-            <SectionAds />
+
 
             {/* SECTION 3 */}
-            <SectionVideos className="py-16 lg:py-28" />
+            {/* <SectionVideos className="py-16 lg:py-28" /> */}
 
             {/* === SECTION 7 === */}
-            <div className="relative py-16">
+            {/* <div className="relative py-16">
               <BackgroundSection />
               <SectionGridPosts
                 headingIsCenter
@@ -175,7 +176,7 @@ const PageHomeDemo4: React.FC = () => {
                 posts={DEMO_POSTS_VIDEO.filter((_, i) => i > 5 && i < 12)}
                 gridClass="sm:grid-cols-2 lg:grid-cols-3"
               />
-            </div>
+            </div> */}
 
             {/* === SECTION 7 === */}
             <SectionBecomeAnAuthor

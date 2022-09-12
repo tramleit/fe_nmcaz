@@ -40,9 +40,11 @@ const DashboardPosts = ({ user }: { user: IUser }) => {
                         Status
                       </th>
                       <th scope="col" className="px-6 py-3">
-                        Views
+                        Sales
                       </th>
-
+                      <th scope="col" className="px-6 py-3">
+                        Profit
+                      </th>
                       <th scope="col" className="relative px-6 py-3">
                         <span className="sr-only">Edit</span>
                       </th>
@@ -63,12 +65,12 @@ const DashboardPosts = ({ user }: { user: IUser }) => {
                           </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          {item.video ? (
+                          {item.status ? (
                             <span className="px-2 inline-flex text-xs leading-5 font-medium rounded-full bg-teal-100 text-teal-900 lg:text-sm">
                               Active
                             </span>
                           ) : (
-                            <span className="px-2 inline-flex text-sm text-neutral-500 dark:text-neutral-400 rounded-full">
+                            <span className="px-2 inline-flex text-sm dark:text-neutral-400 rounded-full bg-rose-300  text-teal-900">
                               Offline
                             </span>
                           )}
@@ -76,19 +78,15 @@ const DashboardPosts = ({ user }: { user: IUser }) => {
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-neutral-500 dark:text-neutral-400">
                           <span> {item.views}</span>
                         </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-neutral-500 dark:text-neutral-400">
+                          <span> {item.views} $</span>
+                        </td>
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium text-neutral-300">
                           <a
                             href="/#"
                             className="text-primary-800 dark:text-primary-500 hover:text-primary-900"
                           >
                             Edit
-                          </a>
-                          {` | `}
-                          <a
-                            href="/#"
-                            className="text-rose-600 hover:text-rose-900"
-                          >
-                            Delete
                           </a>
                         </td>
                       </tr>

@@ -53,3 +53,12 @@ export const fetchModels = async (search = "", limit: number = 25, offset: numbe
 
     if (response && response.data) return response.data;
 }
+
+export const fetchLatestModels = async () => {
+    const response = await axios.get(`${API_URL}models/latest`).catch((err: Error) => {
+        console.log("Error: ", err);
+    })
+    console.log("My request", response);
+
+    if (response && response.data) return response.data;
+}
