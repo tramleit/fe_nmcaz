@@ -20,7 +20,10 @@ import { IVideoAuthor } from "interface/interface";
 import Loading from "components/LoadingVideo/Loading";
 import { API_URL, SITE_URL } from "constants/constants";
 import { AiFillLock } from "react-icons/ai"
+import { Replay } from 'vimond-replay';
+import 'vimond-replay/index.css';
 import axios from "axios";
+import Hls from "hls.js";
 export interface PageSingleVideoProps {
   className?: string;
 }
@@ -37,6 +40,8 @@ const PageSingleVideo: FC<PageSingleVideoProps> = ({ className = "" }) => {
   const [isPlay, setIsPlay] = useState(false);
   const [videoAuthor, setIsVideoAuthor] = useState<IVideoAuthor>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoadingVideo, setIsLoadingVideo] = useState<boolean>(false);
+
 
   const fetch = async () => {
     setIsLoading(true)
@@ -48,13 +53,45 @@ const PageSingleVideo: FC<PageSingleVideoProps> = ({ className = "" }) => {
 
   useEffect(() => {
     fetch();
-
     // UPDATE CURRENTPAGE DATA IN PAGE-REDUCERS
     dispatch(changeCurrentPage({ type: "/single/:slug", data: SINGLE_VIDEO }));
     return () => {
       dispatch(changeCurrentPage({ type: "/", data: {} }));
     };
   }, []);
+
+
+  useEffect(() => {
+    let dialog = document.getElementById("message");
+    if (dialog) dialog.innerHTML = "Please wait the video is being decoded, it won't take long";
+    if (videoAuthor && videoAuthor.id) {
+      axios.get(`${API_URL}video/ffmpeg/${videoAuthor.id}?user_id=${videoAuthor.user_id}`).then((result) => {
+        const video = document.getElementById('video') as HTMLMediaElement;
+
+        if (Hls.isSupported() && video) {
+          const hls = new Hls();
+
+          hls.loadSource(`${API_URL}video/file/${result.data}`);
+          hls.attachMedia(video);
+          hls.on(Hls.Events.MANIFEST_PARSED, () => {
+
+            video.play();
+          });
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+          console.log("ERRRROR");
+
+          // video.src = videoSrc;
+          // video.addEventListener('loadedmetadata', () => {
+          //   video.play();
+          // });
+        }
+        console.log("false");
+
+      })
+      if (dialog) dialog.innerHTML = "";
+    }
+
+  }, [videoAuthor?.id])
 
   const handleLock = () => {
     if (videoAuthor && videoAuthor.user_id > 0) {
@@ -86,19 +123,10 @@ const PageSingleVideo: FC<PageSingleVideoProps> = ({ className = "" }) => {
           </div>
         )}
         {(videoAuthor?.purchased) ? (
-          <ReactPlayer
-            url={`${API_URL}video/download/${videoAuthor?.id}?user_id=${videoAuthor?.user_id}`}
-            className="absolute inset-0"
-            playing={isSafariBrowser() ? isPlay : true}
-            width="100%"
-            height="100%"
-            controls
-            crossOrigin={"anonymous"}
-            light={isSafariBrowser() ? false : videoAuthor?.thumbnail}
-            playIcon={<NcPlayIcon />}
-            controlsList="nodownload"
-            oncontextmenu="return false;"
-          />
+          <>
+            <h1 id="message"></h1>
+            <video id="video" className='react-player' width="100%" height="100%" controls ></video>
+          </>
         ) :
           (<>
             <div className="w-full h-full relative inset-0 cursor-pointer" onClick={() => handleLock()}>

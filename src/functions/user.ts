@@ -62,3 +62,11 @@ export const fetchLatestModels = async () => {
 
     if (response && response.data) return response.data;
 }
+export const fetchPopularModels = async () => {
+    const response = await axios.get(`${API_URL}models/popular`).catch((err: Error) => {
+        console.log("Error: ", err);
+    })
+    console.log("My request", response);
+
+    if (response && response.data) return response.data;
+}

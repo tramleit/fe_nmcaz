@@ -31,6 +31,8 @@ const Card11: FC<Card11Props> = ({
 
   const [isHover, setIsHover] = useState(false);
 
+  console.log(post);
+
   return (
     <div
       className={`nc-Card11 relative flex flex-col group [ nc-box-has-hover ] [ nc-dark-box-bg-has-hover ] ${className} w-64 h-96 p-2`}
@@ -51,11 +53,11 @@ const Card11: FC<Card11Props> = ({
           </div>
         </div>
       </div>
-      <Link to={post.fullName} className="absolute inset-0"></Link>
+      <Link to={`/single-video/${post.username}/${post.title}`} className="absolute inset-0"></Link>
 
       <div className="p-4 flex flex-col flex-grow space-y-3">
         <span className="text-xs text-neutral-500">{post.date_added.substring(0, 10)}</span>
-        <h2 className="nc-card-title block text-2xl font-semibold text-neutral-900 dark:text-neutral-100 ">
+        <h2 className="nc-card-title block text-2xl font-semibold text-neutral-900 dark:text-neutral-100 mt-0!">
           {post.title}
         </h2>
         <h2 className="nc-card-title block text-xl font-bold text-neutral-900 dark:text-neutral-100 ">

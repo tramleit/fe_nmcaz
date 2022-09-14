@@ -23,7 +23,7 @@ const Card5: FC<Card5Props> = ({
       <Link to={href} className="absolute inset-0 rounded-lg"></Link>
 
       <div className="flex flex-col">
-        <CategoryBadgeList categories={categories} />
+        {/* <CategoryBadgeList categories={categories} /> */}
         <h2
           className="block text-base font-semibold text-neutral-800 dark:text-neutral-300 my-4"
           title={title}
